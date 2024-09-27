@@ -1,9 +1,9 @@
 function isLongerOrShoter(string, maxLength) {
   return string.length <= maxLength;
 }
-console.log(isLongerOrShoter('проверяемая строка', 20));
-console.log(isLongerOrShoter('проверяемая строка', 18));
-console.log(isLongerOrShoter('проверяемая строка', 10));
+isLongerOrShoter('проверяемая строка', 20);
+isLongerOrShoter('проверяемая строка', 18);
+isLongerOrShoter('проверяемая строка', 10);
 
 function isPalindrom(string) {
   const newString = string.replaceAll(' ', '').toUpperCase();
@@ -16,10 +16,10 @@ function isPalindrom(string) {
   }
   return false;
 }
-console.log(isPalindrom('топот'));
-console.log(isPalindrom('ДовОд'));
-console.log(isPalindrom('Кекс'));
-console.log(isPalindrom('Лёша на полке клопа нашёл '));
+isPalindrom('топот');
+isPalindrom('ДовОд');
+isPalindrom('Кекс');
+isPalindrom('Лёша на полке клопа нашёл ');
 
 function getNumber(string) {
   string = string.toString();
@@ -34,11 +34,11 @@ function getNumber(string) {
   }
   return NaN;
 }
-console.log(getNumber('2023 год'));
-console.log(getNumber('ECMAScript 2022'));
-console.log(getNumber('1 кефир, 0.5 батона'));
-console.log(getNumber('агент 007'));
-console.log(getNumber('а я томат'));
-console.log(getNumber(2023));
-console.log(getNumber(-1));
-console.log(getNumber(1.5));
+getNumber('2023 год');
+getNumber('ECMAScript 2022');
+getNumber('1 кефир, 0.5 батона');
+getNumber('агент 007');
+getNumber('а я томат');
+getNumber(2023);
+getNumber(-1);
+getNumber(1.5);
