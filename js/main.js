@@ -60,17 +60,17 @@ const createMessage = () => Array.from(
 
 const createComment = () => ({
   id: generateCommentId(),
-  avatar: 'img/avatar-${getRandomInteger(1, AVATAR_COUNT)}.svg',
+  avatar: `img/avatar-${getRandomInteger(1, AVATAR_COUNT)}.svg`,
   message: createMessage(),
   name: getRandomArrayElement(NAMES),
 });
 
 const createImage = (index) => ({
   id: index,
-  url: 'photos/${index}.jpg',
+  url: `photos/${index}.jpg`,
   description: getRandomArrayElement(DESCRIPTION_COUNT),
   likes: getRandomInteger(MIN_LIKE_COUNT, MAX_LIKE_COUNT),
-  comments: Array.from({length: getRandomInteger(0, MESSAGE_COUNT)}, createComment,),
+  comments: Array.from({length: getRandomInteger(0, COMMENT_COUNT)}, createComment,),
 });
 
 const getImages = () => Array.from(
