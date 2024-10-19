@@ -42,3 +42,23 @@ getNumber('а я томат');
 getNumber(2023);
 getNumber(-1);
 getNumber(1.5);
+
+function getMeeting(start, end, meeting, duration) {
+  const startDay = getNumMinute(start);
+  const endDay = getNumMinute(end);
+  const startMeeting = getNumMinute(meeting);
+  const endMeeting = startMeeting + duration;
+  return startDay <= startMeeting && endMeeting <= endDay;
+}
+
+function getNumMinute(str) {
+  const[hour, minute] = str.split(':').map(Number);
+  return hour * 60 + minute;
+}
+
+getMeeting('08:00', '17:30', '14:00', 90);
+getMeeting('8:0', '10:0', '8:0', 120);
+getMeeting('08:00', '14:30', '14:00', 90);
+getMeeting('14:00', '17:30', '08:0', 90);
+getMeeting('8:00', '17:30', '08:00', 900);
+
