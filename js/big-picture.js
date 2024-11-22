@@ -41,7 +41,7 @@ function hideBigPicture () {
   bigPictureElement.classList.add('hidden');
   bodyElement.classList.remove('modal-open');
   document.removeEventListener('keydown', onDocumentKeydown);
-};
+}
 
 const onCancelButtonClick = () => {
   hideBigPicture();
