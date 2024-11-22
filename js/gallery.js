@@ -9,7 +9,7 @@ const showGallery = (pictures) => {
     if (thumbnail) {
       evt.preventDefault();
       const pictureId = +thumbnail.dataset.thumbnailId;
-      const picture = pictures.find( (item) => item.id === pictureId);
+      const picture = pictures.find((item) => item.id === pictureId);
       showBigPicture(picture);
     }
   });
