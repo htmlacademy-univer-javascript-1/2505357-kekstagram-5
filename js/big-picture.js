@@ -30,6 +30,12 @@ const showComments = (comments) => {
   commentListElement.append(fragment);
 };
 
+const onDocumentKeydown = (evt) => {
+  if (isEscapeKey) {
+    evt.preventDefault();
+    hideBigPicture();
+  }
+}
 
 const hideBigPicture = () => {
   bigPictureElement.classList.add('hidden');
@@ -37,12 +43,7 @@ const hideBigPicture = () => {
   document.removeEventListener('keydown', onDocumentKeydown);
 };
 
-const onDocumentKeydown = (evt) => {
-  if (isEscapeKey) {
-    evt.preventDefault();
-    hideBigPicture();
-  }
-}
+
 
 const onCancelButtonClick = () => {
   hideBigPicture();
