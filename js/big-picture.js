@@ -27,9 +27,7 @@ const showComments = () => {
   if (currentCount >= comments.length) {
     commentsLoader.classList.add('hidden');
     currentCount = comments.length;
-  }
-
-  else {
+  } else {
     commentsLoader.classList.remove('hidden');
   }
 
