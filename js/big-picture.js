@@ -22,13 +22,13 @@ const createComment = ({ avatar, message, name}) => {
   return comment;
 };
 
-const showComments = (comments) => {
-
-  currentCount +=COMMENTS_STEP;
+const showComments = () => {
+  currentCount += COMMENTS_STEP;
   if (currentCount >= comments.length) {
     commentsLoader.classList.add('hidden');
     currentCount = comments.length;
   }
+
   else {
     commentsLoader.classList.remove('hidden');
   }
@@ -80,7 +80,7 @@ const showBigPicture = (data) => {
   document.addEventListener('keydown', onDocumentKeydown);
 
   showPictureDetails(data);
-  comments = data.comments
+  comments = data.comments;
   if (comments.length >= 0) {
     showComments(comments);
   }
