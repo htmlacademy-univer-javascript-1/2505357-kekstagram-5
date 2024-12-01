@@ -53,6 +53,10 @@ const onDocumentKeydown = (evt) => {
   }
 };
 
+const onCancelButtonClick = () => {
+  hideBigPicture();
+};
+
 function hideBigPicture () {
   bigPictureElement.classList.add('hidden');
   bodyElement.classList.remove('modal-open');
@@ -61,10 +65,6 @@ function hideBigPicture () {
   cancelButtonElement.removeEventListener('click', onCancelButtonClick);
   currentCount = 0;
 }
-
-const onCancelButtonClick = () => {
-  hideBigPicture();
-};
 
 const showPictureDetails = ({ url, likes, description }) => {
   bigPictureElement.querySelector('.big-picture__img img').src = url;
