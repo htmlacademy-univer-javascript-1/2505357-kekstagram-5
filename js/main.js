@@ -1,6 +1,8 @@
-import { getImages } from './data.js';
-import { showGallery } from './gallery.js';
 import { openForm } from './form.js';
+import { checkFormSubmit, closeForm } from './form.js';
+import { getData } from './api.js';
+import { initImageScale } from './scale.js';
 
-showGallery(getImages());
-openForm();
+openForm(initImageScale());
+getData();
+checkFormSubmit(closeForm);
