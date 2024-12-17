@@ -85,8 +85,8 @@ function closeForm() {
 }
 
 const cleanPristineErrors = () => {
-  uploadHashtag.addEventListener('keydown', () => {
-    if (uploadHashtag.value !== '' || uploadComment.value !== '') {
+  uploadHashtagElement.addEventListener('keydown', () => {
+    if (uploadHashtagElement.value !== '' || uploadCommentElement.value !== '') {
       pristine.reset();
     }
   });
@@ -99,7 +99,7 @@ const sendFormSubmit = (data) => {
   sendData(new FormData(data))
     .then(() => {
       showSendingSuccess();
-      closeEditingForm();
+      closeForm();
     })
     .catch(() => {
       showSendingError();
@@ -108,7 +108,7 @@ const sendFormSubmit = (data) => {
 };
 
 const checkFormSubmit = () => {
-  uploadForm.addEventListener('submit', (evt) => {
+  uploadFormElement.addEventListener('submit', (evt) => {
     evt.preventDefault();
 
     if (pristine.validate()) {
