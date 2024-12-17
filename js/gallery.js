@@ -1,4 +1,3 @@
-import { showThumbnails } from './thumbnail.js';
 import { showBigPicture } from './big-picture.js';
 
 const container = document.querySelector('.pictures');
@@ -13,7 +12,6 @@ const showGallery = (pictures) => {
       showBigPicture(picture);
     }
   });
-  showThumbnails(pictures, container);
 };
 
 export { showGallery };

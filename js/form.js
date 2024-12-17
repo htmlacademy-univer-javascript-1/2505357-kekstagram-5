@@ -1,10 +1,14 @@
-import { isEscapeKey } from './util.js';
+import { isEscapeKey, submitButtonAccess } from './util.js';
 import { scaleReset } from './scale.js';
 import { resetEffects, initSlider, resetSlider } from './effects.js';
+import { showSendingError, showSendingSuccess } from './errors-and-success.js';
+import { sendData } from './api.js';
 
 const COMMENT_MAXLENGTH = 140;
 const HASHTAGS_MAXCOUNT = 5;
 const VALID_HASHTAG_STRING = /^#[a-zа-яё0-9]{1,19}$/i;
+const SUBMIT_BUTTON_DEFAULT_TEXT = 'ОПУБЛИКОВАТЬ';
+const SUBMIT_BUTTON_SENDING_TEXT = 'ПУБЛИКУЮ...';
 const errorMessages = {
   INVALID_HASHTAG_STRING: 'Хэш-тег должен начинаться с #, состоять из букв и чисел без пробелов, максимальная длина одного хэш-тега 20 символов, включая #',
   COMMENT_MAXLENGTH_ERROR: `Длина комментария не может составлять больше ${COMMENT_MAXLENGTH} символов`,
@@ -18,6 +22,7 @@ const uploadOverlayElement = uploadFormElement.querySelector('.img-upload__overl
 const uploadCancelButtonElement = uploadFormElement.querySelector('.img-upload__cancel');
 const uploadHashtagElement = uploadFormElement.querySelector('.text__hashtags');
 const uploadCommentElement = uploadFormElement.querySelector('.text__description');
+const submitButton = uploadFormElement.querySelector('.img-upload__submit');
 
 const pristine = new Pristine(uploadFormElement, {
   classTo: 'img-upload__field-wrapper',
@@ -29,7 +34,7 @@ const checkComment = (value) => value.length <= COMMENT_MAXLENGTH;
 pristine.addValidator(uploadCommentElement, checkComment, errorMessages.COMMENT_MAXLENGTH_ERROR);
 
 const getHashtags = (value) => {
-  const hashtags = value.trim().split(/\s+/);
+  const hashtags = value.trim().split(/\s+/).filter(Boolean);
   return hashtags;
 };
 
@@ -76,25 +81,40 @@ function closeForm() {
   uploadOverlayElement.classList.add('hidden');
   bodyElement.classList.remove('modal-open');
   document.removeEventListener('keydown', onDocumentKeydown);
+  submitButtonAccess(submitButton, false, SUBMIT_BUTTON_DEFAULT_TEXT);
 }
 
-uploadFormElement.addEventListener('submit', (evt) => {
-  evt.preventDefault();
+const cleanPristineErrors = () => {
+  uploadHashtag.addEventListener('keydown', () => {
+    if (uploadHashtag.value !== '' || uploadComment.value !== '') {
+      pristine.reset();
+    }
+  });
+};
 
-  const hasValidHashtag = uploadHashtagElement.value.trim() !== '';
-  const hasValidComment = uploadCommentElement.value.trim() !== '';
-  const isValidHashtag = !hasValidHashtag || pristine.validate(uploadHashtagElement);
-  const isValidComment = !hasValidComment || pristine.validate(uploadCommentElement);
+const sendFormSubmit = (data) => {
+  document.removeEventListener('keydown', onDocumentKeydown);
+  cleanPristineErrors();
+  submitButtonAccess(submitButton, false, SUBMIT_BUTTON_SENDING_TEXT);
+  sendData(new FormData(data))
+    .then(() => {
+      showSendingSuccess();
+      closeEditingForm();
+    })
+    .catch(() => {
+      showSendingError();
+    })
+    .finally(submitButtonAccess(submitButton, true, SUBMIT_BUTTON_SENDING_TEXT));
+};
 
-  if (isValidHashtag && isValidComment) {
-    uploadFormElement.submit();
-  }
-});
+const checkFormSubmit = () => {
+  uploadForm.addEventListener('submit', (evt) => {
+    evt.preventDefault();
 
-uploadHashtagElement.addEventListener('keydown', () => {
-  if (uploadHashtagElement.value !== '' || uploadCommentElement.value !== '') {
-    pristine.reset();
-  }
-});
+    if (pristine.validate()) {
+      sendFormSubmit(evt.target);
+    }
+  });
+};
 
-export { openForm };
+export { onDocumentKeydown, openForm, checkFormSubmit, closeForm, submitButton, SUBMIT_BUTTON_DEFAULT_TEXT };
