@@ -1,5 +1,5 @@
 import { isEscapeKey, closeMessage, showMessage, submitButtonAccess } from './util.js';
-import { onDocumentKeydown, submitButton, SUBMIT_BUTTON_DEFAULT_TEXT} from './form.js';
+import { onDocumentKeydown, submitButtonElement, SUBMIT_BUTTON_DEFAULT_TEXT} from './form.js';
 
 const ERROR_SHOW_TIME = 5000;
 
@@ -39,7 +39,7 @@ const showSendingSuccess = () => {
 
 const closeSendingError = () => {
   closeMessage(errorButton, onErrorButtonClick, onErrorContainerEscKeydown, onErrorContainerMouseClick, errorContainer);
-  submitButtonAccess(submitButton, false, SUBMIT_BUTTON_DEFAULT_TEXT);
+  submitButtonAccess(submitButtonElement, false, SUBMIT_BUTTON_DEFAULT_TEXT);
   document.addEventListener('keydown', onDocumentKeydown);
 };
 
