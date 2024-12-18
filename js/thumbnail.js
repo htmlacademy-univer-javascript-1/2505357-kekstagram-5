@@ -17,7 +17,7 @@ const createThumbnail = ({url, description, comments, likes, id}) => {
 const showThumbnails = (pictures) => {
   let image = container.querySelector('.picture');
   while(image) {
-    imagemage.remove();
+    image.remove();
     image = container.querySelector('.picture');
   }
   const fragment = document.createDocumentFragment();
