@@ -34,7 +34,7 @@ const sendData = (body) => fetch(
       throw new Error();
     }
   })
-  .catch((err) => {
+  .catch(() => {
     throw new Error();
   });
 
