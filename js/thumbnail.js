@@ -1,9 +1,9 @@
 const container = document.querySelector('.pictures');
 const templateFragment = document.querySelector('#picture').content;
-//const template = templateFragment.querySelector('.picture');
+const template = templateFragment.querySelector('.picture');
 
 const createThumbnail = ({url, description, comments, likes, id}) => {
-  const thumbnail = templateFragment.querySelector('.picture').cloneNode(true);
+  const thumbnail = template.cloneNode(true);
 
   thumbnail.querySelector('.picture__img').src = url;
   thumbnail.querySelector('.picture__img').alt = description;
@@ -15,10 +15,10 @@ const createThumbnail = ({url, description, comments, likes, id}) => {
 };
 
 const showThumbnails = (pictures) => {
-  let picture = container.querySelector('.picture');
-  while(picture) {
-    picture.remove();
-    picture = container.querySelector('.picture');
+  let image = container.querySelector('.picture');
+  while(image) {
+    imagemage.remove();
+    image = container.querySelector('.picture');
   }
   const fragment = document.createDocumentFragment();
   pictures.forEach((picture) => {
