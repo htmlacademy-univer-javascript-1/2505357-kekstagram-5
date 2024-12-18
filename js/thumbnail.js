@@ -1,9 +1,9 @@
 const container = document.querySelector('.pictures');
 const templateFragment = document.querySelector('#picture').content;
-const template = templateFragment.querySelector('.picture');
+//const template = templateFragment.querySelector('.picture');
 
 const createThumbnail = ({url, description, comments, likes, id}) => {
-  const thumbnail = template.cloneNode(true);
+  const thumbnail = templateFragment.querySelector('.picture').cloneNode(true);
 
   thumbnail.querySelector('.picture__img').src = url;
   thumbnail.querySelector('.picture__img').alt = description;

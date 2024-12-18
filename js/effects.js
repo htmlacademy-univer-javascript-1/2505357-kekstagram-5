@@ -125,7 +125,7 @@ const onSliderUpdate = () => {
     scaleReset();
   }
   imagePreviewElement.style.filter = `${currentEffect.filter}(${currentEffectValue}${currentEffect.unit})`;
-  effectsLevelValue.value = currentEffectValue;
+  effectsLevelValueElement.value = currentEffectValue;
 };
 
 const initSlider = () => {
