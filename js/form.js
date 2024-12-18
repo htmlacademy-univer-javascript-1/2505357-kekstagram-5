@@ -22,7 +22,7 @@ const uploadOverlayElement = uploadFormElement.querySelector('.img-upload__overl
 const uploadCancelButtonElement = uploadFormElement.querySelector('.img-upload__cancel');
 const uploadHashtagElement = uploadFormElement.querySelector('.text__hashtags');
 const uploadCommentElement = uploadFormElement.querySelector('.text__description');
-const submitButton = uploadFormElement.querySelector('.img-upload__submit');
+const submitButtonElement = uploadFormElement.querySelector('.img-upload__submit');
 
 const pristine = new Pristine(uploadFormElement, {
   classTo: 'img-upload__field-wrapper',
@@ -81,7 +81,7 @@ function closeForm() {
   uploadOverlayElement.classList.add('hidden');
   bodyElement.classList.remove('modal-open');
   document.removeEventListener('keydown', onDocumentKeydown);
-  submitButtonAccess(submitButton, false, SUBMIT_BUTTON_DEFAULT_TEXT);
+  submitButtonAccess(submitButtonElement, false, SUBMIT_BUTTON_DEFAULT_TEXT);
 }
 
 const cleanPristineErrors = () => {
@@ -95,7 +95,7 @@ const cleanPristineErrors = () => {
 const sendFormSubmit = (data) => {
   document.removeEventListener('keydown', onDocumentKeydown);
   cleanPristineErrors();
-  submitButtonAccess(submitButton, false, SUBMIT_BUTTON_SENDING_TEXT);
+  submitButtonAccess(submitButtonElement, false, SUBMIT_BUTTON_SENDING_TEXT);
   sendData(new FormData(data))
     .then(() => {
       showSendingSuccess();
@@ -104,7 +104,7 @@ const sendFormSubmit = (data) => {
     .catch(() => {
       showSendingError();
     })
-    .finally(submitButtonAccess(submitButton, true, SUBMIT_BUTTON_SENDING_TEXT));
+    .finally(submitButtonAccess(submitButtonElement, true, SUBMIT_BUTTON_SENDING_TEXT));
 };
 
 const checkFormSubmit = () => {
@@ -117,4 +117,4 @@ const checkFormSubmit = () => {
   });
 };
 
-export { onDocumentKeydown, openForm, checkFormSubmit, closeForm, submitButton, SUBMIT_BUTTON_DEFAULT_TEXT };
+export { onDocumentKeydown, openForm, checkFormSubmit, closeForm, submitButtonElement, SUBMIT_BUTTON_DEFAULT_TEXT };

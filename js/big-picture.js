@@ -4,7 +4,7 @@ const COMMENTS_STEP = 5;
 const bigPictureElement = document.querySelector('.big-picture');
 const bodyElement = document.querySelector('body');
 const commentListElement = bigPictureElement.querySelector('.social__comments');
-const commentsLoader = document.querySelector('.comments-loader');
+const commentsLoaderElement = document.querySelector('.comments-loader');
 const cancelButtonElement = bigPictureElement.querySelector('.big-picture__cancel');
 const liElement = commentListElement.querySelector('li');
 const commentCountElement = bigPictureElement.querySelector('.social__comment-count');
@@ -24,10 +24,10 @@ const createComment = ({ avatar, message, name}) => {
 const showComments = () => {
   currentCount += COMMENTS_STEP;
   if (currentCount >= comments.length) {
-    commentsLoader.classList.add('hidden');
+    commentsLoaderElement.classList.add('hidden');
     currentCount = comments.length;
   } else {
-    commentsLoader.classList.remove('hidden');
+    commentsLoaderElement.classList.remove('hidden');
   }
 
   const fragment = document.createDocumentFragment();
@@ -61,7 +61,7 @@ function hideBigPicture () {
   bigPictureElement.classList.add('hidden');
   bodyElement.classList.remove('modal-open');
   document.removeEventListener('keydown', onDocumentKeydown);
-  commentsLoader.removeEventListener('click', onCommentsLoaderClick);
+  commentsLoaderElement.removeEventListener('click', onCommentsLoaderClick);
   cancelButtonElement.removeEventListener('click', onCancelButtonClick);
   currentCount = 0;
 }
@@ -75,9 +75,9 @@ const showPictureDetails = ({ url, likes, description }) => {
 const showBigPicture = (data) => {
   bigPictureElement.classList.remove('hidden');
   bodyElement.classList.add('modal-open');
-  commentsLoader.classList.add('hidden');
+  commentsLoaderElement.classList.add('hidden');
   document.addEventListener('keydown', onDocumentKeydown);
-  commentsLoader.addEventListener('click', onCommentsLoaderClick);
+  commentsLoaderElement.addEventListener('click', onCommentsLoaderClick);
   cancelButtonElement.addEventListener('click', onCancelButtonClick);
 
   showPictureDetails(data);

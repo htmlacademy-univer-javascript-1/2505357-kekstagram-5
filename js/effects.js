@@ -63,14 +63,14 @@ const effectsData = {
   },
 };
 
-const imagePreview = document.querySelector('.img-upload__preview img');
-const effectsLevelContainer = document.querySelector('.img-upload__effect-level');
-const effectsLevelSlider = document.querySelector('.effect-level__slider');
-const effectsLevelValue = document.querySelector('.effect-level__value');
-const effectsContainer = document.querySelector('.effects');
+const imagePreviewElement = document.querySelector('.img-upload__preview img');
+const effectsLevelContainerElement = document.querySelector('.img-upload__effect-level');
+const effectsLevelSliderElement = document.querySelector('.effect-level__slider');
+const effectsLevelValueElement = document.querySelector('.effect-level__value');
+const effectsContainerElement = document.querySelector('.effects');
 let currentEffect = DEFAULT_EFFECT;
 
-const createSlider = () => noUiSlider.create(effectsLevelSlider, {
+const createSlider = () => noUiSlider.create(effectsLevelSliderElement, {
   range: {
     min: DEFAULT_EFFECT.min,
     max: DEFAULT_EFFECT.max,
@@ -80,20 +80,20 @@ const createSlider = () => noUiSlider.create(effectsLevelSlider, {
   connect: 'lower',
 });
 
-effectsLevelContainer.classList.add('hidden');
+effectsLevelContainerElement.classList.add('hidden');
 
 const isDefault = () => currentEffect.filter === DEFAULT_EFFECT.filter;
 
 const changeSliderAbility = () => {
   if (isDefault()) {
-    effectsLevelContainer.classList.add('hidden');
+    effectsLevelContainerElement.classList.add('hidden');
   } else {
-    effectsLevelContainer.classList.remove('hidden');
+    effectsLevelContainerElement.classList.remove('hidden');
   }
 };
 
 const changeSlider = () => {
-  effectsLevelSlider.noUiSlider.updateOptions({
+  effectsLevelSliderElement.noUiSlider.updateOptions({
     range: {
       min: currentEffect.min,
       max: currentEffect.max,
@@ -119,25 +119,25 @@ function changeCurrentEffect(effect) {
 }
 
 const onSliderUpdate = () => {
-  const currentEffectValue = effectsLevelSlider.noUiSlider.get();
+  const currentEffectValue = effectsLevelSliderElement.noUiSlider.get();
   if (isDefault()) {
-    imagePreview.style.filter = 'none';
+    imagePreviewElement.style.filter = 'none';
     scaleReset();
   }
-  imagePreview.style.filter = `${currentEffect.filter}(${currentEffectValue}${currentEffect.unit})`;
-  effectsLevelValue.value = currentEffectValue;
+  imagePreviewElement.style.filter = `${currentEffect.filter}(${currentEffectValue}${currentEffect.unit})`;
+  effectsLevelValueElement.value = currentEffectValue;
 };
 
 const initSlider = () => {
   createSlider();
   onSliderUpdate();
-  effectsContainer.addEventListener('change', onEffectsContainerChange);
-  effectsLevelSlider.noUiSlider.on('update', onSliderUpdate);
+  effectsContainerElement.addEventListener('change', onEffectsContainerChange);
+  effectsLevelSliderElement.noUiSlider.on('update', onSliderUpdate);
 };
 
 const resetSlider = () => {
-  effectsContainer.removeEventListener('change', onEffectsContainerChange);
-  effectsLevelSlider.noUiSlider.destroy();
+  effectsContainerElement.removeEventListener('change', onEffectsContainerChange);
+  effectsLevelSliderElement.noUiSlider.destroy();
 };
 
 const resetEffects = () => {
