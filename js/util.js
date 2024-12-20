@@ -1,3 +1,4 @@
+const ALERT_SHOW_TIME = 5000;
 const isEscapeKey = (evt) => evt.key === 'Escape';
 
 const closeMessage = (button, onClick, onEsc, onMouseClick, container) => {

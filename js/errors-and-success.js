@@ -6,7 +6,7 @@ const errorContainer = templateError.cloneNode(true);
 const errorButton = errorContainer.querySelector('.error__button');
 const tempaleSuccess = document.querySelector('#success').content.querySelector('.success');
 const successContainer = tempaleSuccess.cloneNode(true);
-const successButton = successContainer.querySelector('.success__button');;
+const successButton = successContainer.querySelector('.success__button');
 
 const closeSendingSuccess = () => {
   closeMessage(successButton, onSuccessButtonClick, onSuccessContainerEscKeydown ,onSuccessContainerMouseClick, successContainer);
