@@ -1,16 +1,12 @@
 import { isEscapeKey, closeMessage, showMessage, submitButtonAccess } from './util.js';
 import { onDocumentKeydown, submitButtonElement, SUBMIT_BUTTON_DEFAULT_TEXT} from './form.js';
 
-const ERROR_SHOW_TIME = 5000;
-
 const templateError = document.querySelector('#error').content.querySelector('.error');
 const errorContainer = templateError.cloneNode(true);
 const errorButton = errorContainer.querySelector('.error__button');
 const tempaleSuccess = document.querySelector('#success').content.querySelector('.success');
 const successContainer = tempaleSuccess.cloneNode(true);
-const successButton = successContainer.querySelector('.success__button');
-const templateDataError = document.querySelector('#error').content.querySelector('.error');
-const dataErrorContainer = templateDataError.cloneNode(true);
+const successButton = successContainer.querySelector('.success__button');;
 
 const closeSendingSuccess = () => {
   closeMessage(successButton, onSuccessButtonClick, onSuccessContainerEscKeydown ,onSuccessContainerMouseClick, successContainer);
@@ -61,20 +57,7 @@ function onErrorContainerMouseClick (evt) {
 }
 
 const showSendingError = () => {
-  showMessage(errorContainer, errorButton, onErrorButtonClick, onDocumentKeydown, onErrorContainerMouseClick);
+  showMessage(errorContainer, errorButton, onErrorButtonClick, onErrorContainerEscKeydown, onErrorContainerMouseClick);
 };
 
-const isSendingErrorShown = () => {
-  if (showSendingError) {
-    return true;
-  }
-};
-
-const showDataError = () => {
-  document.body.append(dataErrorContainer);
-  setTimeout(() => {
-    dataErrorContainer.remove();
-  }, ERROR_SHOW_TIME);
-};
-
-export { closeSendingError, showSendingError, showSendingSuccess, isSendingErrorShown, showDataError };
+export { showSendingError, showSendingSuccess };
