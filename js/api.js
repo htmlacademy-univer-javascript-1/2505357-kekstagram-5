@@ -33,6 +33,7 @@ const sendData = (body) => fetch(
     if (!response.ok) {
       throw new Error();
     }
+    return response.json();
   })
   .catch(() => {
     throw new Error();
